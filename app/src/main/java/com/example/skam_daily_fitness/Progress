@@ -1,0 +1,173 @@
+ge com.example.skam_daily_fitness;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+import com.jjoe64.graphview.DefaultLabelFormatter;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.Date;
+
+public class Progress extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        DataPoint [] dp = new DataPoint[] {
+                new DataPoint(0, 60),
+                new DataPoint(1, 60),
+                new DataPoint(2, 70),
+                new DataPoint(3, 80),
+                new DataPoint(4, 65),
+                new DataPoint(5, 50),
+                new DataPoint(6, 55),
+                new DataPoint(7, 60),
+                new DataPoint(8, 60),
+                new DataPoint(9, 45),
+                new DataPoint(10, 60),
+                new DataPoint(11, 35),
+                new DataPoint(12, 20),
+                new DataPoint(13, 0),
+                new DataPoint(14, 60),
+                new DataPoint(15, 40),
+                new DataPoint(16, 45),
+                new DataPoint(17, 55),
+                new DataPoint(18, 60),
+                new DataPoint(19, 67),
+                new DataPoint(20, 65),
+                new DataPoint(21, 60),
+                new DataPoint(22, 55),
+                new DataPoint(23, 56),
+                new DataPoint(24, 58),
+                new DataPoint(25, 66),
+                new DataPoint(26, 63),
+                new DataPoint(27, 62),
+                new DataPoint(28, 63),
+                new DataPoint(29, 0),
+                new DataPoint(30, 62),
+                new DataPoint(31, 64),
+                new DataPoint(32, 55),
+                new DataPoint(33, 43),
+                new DataPoint(34, 48),
+                new DataPoint(35, 46),
+        };
+
+        DataPoint [] dp1 = new DataPoint[] {
+                new DataPoint(0, 50),
+                new DataPoint(1, 51),
+                new DataPoint(2, 53),
+                new DataPoint(3, 55),
+                new DataPoint(4, 53),
+                new DataPoint(5, 51),
+                new DataPoint(6, 52),
+                new DataPoint(7, 52),
+                new DataPoint(8, 52),
+                new DataPoint(9, 53),
+                new DataPoint(10, 51),
+                new DataPoint(11, 52),
+                new DataPoint(12, 53),
+                new DataPoint(13, 54),
+                new DataPoint(14, 52),
+                new DataPoint(15, 51),
+                new DataPoint(16, 53),
+                new DataPoint(17, 52),
+                new DataPoint(18, 51),
+                new DataPoint(19, 50),
+                new DataPoint(20, 54),
+                new DataPoint(21, 52),
+                new DataPoint(22, 53),
+                new DataPoint(23, 54),
+                new DataPoint(24, 52),
+                new DataPoint(25, 52),
+                new DataPoint(26, 51),
+                new DataPoint(27, 53),
+                new DataPoint(28, 54),
+                new DataPoint(29, 52),
+                new DataPoint(30, 51),
+                new DataPoint(31, 53),
+                new DataPoint(32, 54),
+                new DataPoint(33, 52),
+                new DataPoint(34, 51),
+                new DataPoint(35, 53),
+        };
+
+        DataPoint [] dp3 = new DataPoint[] {
+                new DataPoint(0, 2000),
+                new DataPoint(1, 2000),
+                new DataPoint(2, 2000),
+                new DataPoint(3, 2000),
+                new DataPoint(4, 2000),
+                new DataPoint(5, 2300),
+                new DataPoint(6, 2300),
+                new DataPoint(7, 2200),
+                new DataPoint(8, 2200),
+                new DataPoint(9, 2500),
+                new DataPoint(10, 2000),
+                new DataPoint(11, 2200),
+                new DataPoint(12, 2300),
+                new DataPoint(13, 2200),
+                new DataPoint(14, 2450),
+                new DataPoint(15, 2300),
+                new DataPoint(16, 2200),
+                new DataPoint(17, 2500),
+                new DataPoint(18, 2300),
+                new DataPoint(19, 2500),
+                new DataPoint(20, 2300),
+                new DataPoint(21, 2000),
+                new DataPoint(22, 2300),
+                new DataPoint(23, 2200),
+                new DataPoint(24, 2100),
+                new DataPoint(25, 2500),
+                new DataPoint(26, 2300),
+                new DataPoint(27, 2250),
+                new DataPoint(28, 2100),
+                new DataPoint(29, 2200),
+                new DataPoint(30, 2300),
+                new DataPoint(31, 2400),
+                new DataPoint(32, 2300),
+                new DataPoint(33, 2350),
+                new DataPoint(34, 2400),
+                new DataPoint(35, 2300),
+        };
+
+
+
+
+
+
+
+
+        make_graph(R.id.graph,"Duration of Exercise",dp);
+        make_graph(R.id.graph2,"Weights",dp1);
+        make_graph(R.id.graph3,"Total Carlories Consumed",dp3);
+
+
+    }
+
+    private void make_graph (int graphId, String graphName, DataPoint[] dp){
+        GraphView graphView = (GraphView) findViewById(graphId);
+        graphView.setTitle(graphName);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dp);
+        graphView.addSeries(series);
+
+        graphView.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+            @Override
+            public String formatLabel (double value, boolean isValueX){
+                if(isValueX){
+                    return "Day " + super.formatLabel(value,isValueX);
+                }
+                else{
+                    return super.formatLabel(value,isValueX);
+                }
+            }
+        });
+
+
+    }
+
+}
